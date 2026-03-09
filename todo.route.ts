@@ -1,8 +1,9 @@
 import { Router } from 'express';
+
 import { asyncWrapper } from './middlewares/async-wrapper.js';
+import { TodoController } from './todo.controller.js';
 import { TodoRepository } from './todo.repository.js';
 import { TodoService } from './todo.service.js';
-import { TodoController } from './todo.controller.js';
 
 const router = Router();
 

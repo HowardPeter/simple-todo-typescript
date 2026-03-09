@@ -1,6 +1,7 @@
 import { prisma } from './prismaClient.js';
-import type { ToDo } from './todo.type.js';
+
 import type { CreateTodoDTO, UpdateTodoDTO } from './todo.dto.js';
+import type { ToDo } from './todo.type.js';
 
 export class TodoRepository {
   async findAll(): Promise<ToDo[]> {
@@ -18,6 +19,7 @@ export class TodoRepository {
   async update(id: number, data: UpdateTodoDTO): Promise<ToDo | null> {
     // Prisma update sẽ throw nếu không tồn tại
     const existing = await this.findById(id);
+
     if (!existing) return null;
 
     return prisma.todo.update({
@@ -28,9 +30,11 @@ export class TodoRepository {
 
   async delete(id: number): Promise<boolean> {
     const existing = await this.findById(id);
+
     if (!existing) return false;
 
     await prisma.todo.delete({ where: { id } });
+
     return true;
   }
 }
